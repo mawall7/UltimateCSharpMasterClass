@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateCSharpMasterClass", "UltimateCSharpMasterClass\UltimateCSharpMasterClass.csproj", "{7AADB0DB-3E4D-4C43-B815-0CE7A5448A69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltimateCSharpMasterClass", "UltimateCSharpMasterClass\UltimateCSharpMasterClass.csproj", "{7AADB0DB-3E4D-4C43-B815-0CE7A5448A69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCalculator", "SimpleCalculator\SimpleCalculator.csproj", "{B6D2222B-96BF-4865-AC2A-C2FB7BC59F9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCalculator", "SimpleCalculator\SimpleCalculator.csproj", "{B6D2222B-96BF-4865-AC2A-C2FB7BC59F9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookiesCookbook", "CookiesCookbook\CookiesCookbook.csproj", "{3E685AC8-A837-4EEF-A40D-CB3A4417DDFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B6D2222B-96BF-4865-AC2A-C2FB7BC59F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6D2222B-96BF-4865-AC2A-C2FB7BC59F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6D2222B-96BF-4865-AC2A-C2FB7BC59F9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E685AC8-A837-4EEF-A40D-CB3A4417DDFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E685AC8-A837-4EEF-A40D-CB3A4417DDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E685AC8-A837-4EEF-A40D-CB3A4417DDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E685AC8-A837-4EEF-A40D-CB3A4417DDFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
