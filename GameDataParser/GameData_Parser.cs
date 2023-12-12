@@ -12,12 +12,14 @@ namespace GameDataParser
     {
         public List<Model> ParseGameFileToModel(string data, string filenameinput)
         {
+            
             try
             {
                 return JsonSerializer.Deserialize<List<Model>>(data);
             }
-            catch(JsonException)
+            catch(JsonException e)
             {
+
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"JSON in the {filenameinput} was not in a valid format.\n" +
                    $"JSON body:{data}"
@@ -27,6 +29,27 @@ namespace GameDataParser
             }
 
         }
+        public string ParseGameFileToJson(Model gamedata, string filename)
+        {
+            try
+            {
+                var dataserialized = JsonSerializer.Serialize(gamedata);
+                return dataserialized;
+            }
+            catch(JsonException e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"gamedata model was not in a valid format and could not be parsed to json.\n" +
+                   $"model body:{String.Join(',', gamedata)}"
+                    ); 
+                Console.ForegroundColor = ConsoleColor.White;
+
+                throw new InvalidJsonFormatException(filename);
+            }
+
+        }
+            
+            
     }
 
 }

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using CookieCookbook.FileAccess;
 using CookiesCookbook.DataAccess;
+
 
 namespace GameDataParser
 {
@@ -10,11 +12,13 @@ namespace GameDataParser
     {
         static void Main(string[] args)
         {
-           
+            var metadata = new FileMetaData("gamelogger", CookiesCookbook.FileAccess.FileFormat.Text);
+            string path = metadata.ToPath();
             var application = new App(
                 new consoleui(
                     new GameFileRepository(), new GameData_Parser()),
-                    new GameData_Parser());
+                    new GameData_Parser(),
+                    new GameLogger(new GameFileRepository(), path));
             application.Run();
         }
     }
@@ -57,17 +61,15 @@ namespace GameDataParser
             {
                 Console.WriteLine($"File not found");
             }
-            //catch(InvalidJsonFormatException e)
-            //{
-            //    Console.WriteLine($"file couldnt be parsed");
-            //}
-
+           
         }
 
         public void ReadInput()
         {
             _userinput = Console.ReadLine();
-            
+      
+            if (_userinput is null) { throw new ArgumentNullException("FileName cannot be null."); }
+            else if(_userinput == "") { throw new ArgumentException("FileName cannot be empty."); }               
         }
 
 
@@ -89,10 +91,12 @@ namespace GameDataParser
     {
         private readonly IUi _ui;
         private readonly IGameData_Parser _parser;
-        public App(IUi ui, IGameData_Parser parser)
+        private readonly ILogger _logger;
+        public App(IUi ui, IGameData_Parser parser, ILogger logger)
         {
             _ui = ui;
             _parser = parser;
+            _logger = logger;
         }
 
         public void Run()
@@ -104,8 +108,21 @@ namespace GameDataParser
                 try
                 {
                     _ui.ReadInput();
+                    //_ui.ParseData() ev. flyttas hit? är Singleresponsibility principle för PrintGameData uppfylld ?  
                     _ui.PrintGameData();
                 }
+                catch(ArgumentNullException e)
+                {
+                    Console.WriteLine(e.Message);
+                    _logger.AddMessage(e.Message, e.StackTrace.ToString());
+                    
+                }
+                catch(ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                    _logger.AddMessage(e.Message, e.StackTrace);
+                }
+                
                 catch(Exception e)
                 {
                     Console.WriteLine("Sorry! The application has experienced an unexpected error and will have to be closed.");

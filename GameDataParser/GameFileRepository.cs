@@ -21,9 +21,27 @@ namespace GameDataParser
             }
             throw new FileNotFoundException();
         }
-       
+
+        public void Save(string data, string path)
+        {
+            
+            
+                //if (!File.Exists(path))  //SRP fileläsarens ansvar inte loggerns?
+                //{
+                //    File.Create(path);
+                //}
+                File.AppendAllText(path, data);
+        }
+
+            
+            
            
-           
+
+
+
+
+
+
 
     }
        
