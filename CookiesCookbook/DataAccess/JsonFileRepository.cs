@@ -18,11 +18,11 @@ namespace CookiesCookbook.DataAccess
              return JsonSerializer.Serialize(data);  
             
         }
-
         protected override List<string> TextToStrings(string data)
         {
             return JsonSerializer.Deserialize<List<string>>(data);
         }
+
             
     }
 

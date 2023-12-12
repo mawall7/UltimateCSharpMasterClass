@@ -9,7 +9,7 @@ namespace CookiesCookbook.DataAccess
 {
     public abstract class FileRepository : IFileRepository
     {
-        public List<string> Read(string path = "recepies.txt")
+        public virtual List<string> Read(string path = "recepies.txt")
         {
             if (File.Exists(path))
             {

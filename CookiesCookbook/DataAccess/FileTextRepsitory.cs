@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CookiesCookbook.DataAccess
 {
-    class FileTextRepsitory: FileRepository
+    public class FileTextRepsitory: FileRepository
     {
 
         private static readonly string Separator = Environment.NewLine;
