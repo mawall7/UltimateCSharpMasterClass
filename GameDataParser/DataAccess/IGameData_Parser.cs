@@ -8,7 +8,7 @@ namespace GameDataParser
 {
     public interface IGameData_Parser
     {
-        public List<Model> ParseGameFileToModel(string data, string filenameinput);
+        public List<VideoGameModel> ParseGameFileToModel(string data, string filenameinput);
     }
       
 }

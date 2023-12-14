@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameDataParser
 {
-    public interface IGameFileRepository
+    public interface IGameFileReader
     {
         public string ReadFile(string path);
     }

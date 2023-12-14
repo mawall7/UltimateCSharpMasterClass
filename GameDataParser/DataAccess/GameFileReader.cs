@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using CookiesCookbook.DataAccess;
 namespace GameDataParser
 {
-    public class GameFileRepository : IGameFileRepository
+    public class GameFileReader : IGameFileReader
     {
         
         public string ReadFile(string path)

@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exercises", "Exercises", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assignments", "Assignments", "{11A7604D-E371-411F-9C02-C7FDBA15538A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDataParser", "GameDataParser\GameDataParser.csproj", "{81F009C3-354A-4D79-B9D3-2E9AC7E4E7CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameDataParser", "GameDataParser\GameDataParser.csproj", "{81F009C3-354A-4D79-B9D3-2E9AC7E4E7CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwitchTuples", "SwitchTuples\SwitchTuples.csproj", "{702ECDEE-2202-4104-B7C1-F90BE36C38AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{81F009C3-354A-4D79-B9D3-2E9AC7E4E7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81F009C3-354A-4D79-B9D3-2E9AC7E4E7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81F009C3-354A-4D79-B9D3-2E9AC7E4E7CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{702ECDEE-2202-4104-B7C1-F90BE36C38AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{702ECDEE-2202-4104-B7C1-F90BE36C38AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{702ECDEE-2202-4104-B7C1-F90BE36C38AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{702ECDEE-2202-4104-B7C1-F90BE36C38AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{3E685AC8-A837-4EEF-A40D-CB3A4417DDFB} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
 		{D5BA040B-E0DE-42D5-98A4-D744718752E5} = {2EE4A2F4-4BF3-4F25-B326-DFAF333A7C74}
 		{81F009C3-354A-4D79-B9D3-2E9AC7E4E7CF} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
+		{702ECDEE-2202-4104-B7C1-F90BE36C38AD} = {2EE4A2F4-4BF3-4F25-B326-DFAF333A7C74}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {690CD377-02A7-4B08-AEE2-5F43FDB3B90E}

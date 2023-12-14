@@ -9,9 +9,9 @@ namespace GameDataParser
 {
     class GameLogger : ILogger
     {
-        private readonly GameFileRepository _fileRepository;
+        private readonly GameFileReader _fileRepository;
         private readonly string _path;
-        public GameLogger(GameFileRepository repository, string path)
+        public GameLogger(GameFileReader repository, string path)
         {
             _fileRepository = repository;
             _path = path;
@@ -19,9 +19,9 @@ namespace GameDataParser
         }
         public void AddMessage(string message, string stackTrace)
         {
-            
-            var messagestring = $"[{DateTime.Now}]\nException Message:{message}" +
-                $"\nStackTrace:{stackTrace}\n\n";
+            var n = Environment.NewLine;
+            var messagestring = $"[{DateTime.Now}]{n}Exception Message:{message}" +
+                $"{n}StackTrace:{stackTrace}{n+n}";
            
             _fileRepository.Save(messagestring, _path);
             

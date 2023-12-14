@@ -10,12 +10,12 @@ namespace GameDataParser
 {
     public class GameData_Parser : IGameData_Parser
     {
-        public List<Model> ParseGameFileToModel(string data, string filenameinput)
+        public List<VideoGameModel> ParseGameFileToModel(string data, string filenameinput)
         {
             
             try
             {
-                return JsonSerializer.Deserialize<List<Model>>(data);
+                return JsonSerializer.Deserialize<List<VideoGameModel>>(data);
             }
             catch(JsonException e)
             {
@@ -29,7 +29,7 @@ namespace GameDataParser
             }
 
         }
-        public string ParseGameFileToJson(Model gamedata, string filename)
+        public string ParseGameFileToJson(VideoGameModel gamedata, string filename)
         {
             try
             {
