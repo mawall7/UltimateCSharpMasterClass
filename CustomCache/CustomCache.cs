@@ -11,7 +11,7 @@ namespace CustomCache
         private Dictionary<TKey, TData> _dict = new();
 
         
-        public TData TryCacheData(TKey key, Func<TKey,TData> getDataOnFirstTry) //I Exemplet användes en Func istället som parameter för att hämta data Func<T1,T2> getForTheFirstTime
+        public TData GetData(TKey key, Func<TKey,TData> getDataOnFirstTry) 
         {
             
             if (!_dict.ContainsKey(key))
