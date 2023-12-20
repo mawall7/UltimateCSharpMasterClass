@@ -6,25 +6,21 @@ using System.Threading.Tasks;
 
 namespace CustomCache
 {
-    public class GenericCustomCache
+    public class CustomCache<TKey, TData>
     {
-        private Dictionary<object, object> _dict;
+        private Dictionary<TKey, TData> _dict = new();
 
-        public GenericCustomCache()
-        {
-            _dict = new Dictionary<object, object>();
-        }
-       
-
-        public T2 TryCacheData<T1, T2>(T1 key, T2 data) //I Exemplet användes en Func istället som parameter för att hämta data Func<T1,T2> getForTheFirstTime
+        
+        public TData TryCacheData(TKey key, Func<TKey,TData> getDataOnFirstTry) //I Exemplet användes en Func istället som parameter för att hämta data Func<T1,T2> getForTheFirstTime
         {
             
             if (!_dict.ContainsKey(key))
             {
-                _dict.Add(key, data);  
-                return default; 
+                var data = getDataOnFirstTry;
+                _dict.Add(key, getDataOnFirstTry(key));  
+               
             }
-            return (T2)Convert.ChangeType(_dict[key], typeof(T2));
+            return _dict[key];
         }
         
 
