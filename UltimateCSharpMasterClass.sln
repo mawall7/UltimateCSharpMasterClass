@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidateNumber", "UltimateCSharpMasterClass\ValidateNumber.csproj", "{7AADB0DB-3E4D-4C43-B815-0CE7A5448A69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidateNumberEtc", "UltimateCSharpMasterClass\ValidateNumberEtc.csproj", "{7AADB0DB-3E4D-4C43-B815-0CE7A5448A69}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCalculator", "SimpleCalculator\SimpleCalculator.csproj", "{B6D2222B-96BF-4865-AC2A-C2FB7BC59F9E}"
 EndProject
@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assignments", "Assignments"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameDataParser", "GameDataParser\GameDataParser.csproj", "{81F009C3-354A-4D79-B9D3-2E9AC7E4E7CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwitchTuples", "SwitchTuples\SwitchTuples.csproj", "{702ECDEE-2202-4104-B7C1-F90BE36C38AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwitchTuples", "SwitchTuples\SwitchTuples.csproj", "{702ECDEE-2202-4104-B7C1-F90BE36C38AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomCache", "CustomCache\CustomCache.csproj", "{A8B42795-D049-4E28-851B-7E48AC3823E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{702ECDEE-2202-4104-B7C1-F90BE36C38AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{702ECDEE-2202-4104-B7C1-F90BE36C38AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{702ECDEE-2202-4104-B7C1-F90BE36C38AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8B42795-D049-4E28-851B-7E48AC3823E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B42795-D049-4E28-851B-7E48AC3823E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B42795-D049-4E28-851B-7E48AC3823E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B42795-D049-4E28-851B-7E48AC3823E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{D5BA040B-E0DE-42D5-98A4-D744718752E5} = {2EE4A2F4-4BF3-4F25-B326-DFAF333A7C74}
 		{81F009C3-354A-4D79-B9D3-2E9AC7E4E7CF} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
 		{702ECDEE-2202-4104-B7C1-F90BE36C38AD} = {2EE4A2F4-4BF3-4F25-B326-DFAF333A7C74}
+		{A8B42795-D049-4E28-851B-7E48AC3823E3} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {690CD377-02A7-4B08-AEE2-5F43FDB3B90E}
