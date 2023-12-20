@@ -6,7 +6,7 @@ namespace CustomCache
     {
         static void Main(string[] args)
         {
-            IDataDownloader dataDownloader = new CashingDataDownloader(new SlowDataDownloader());
+            IDataDownloader dataDownloader = new CashingDataDownloader(new PrintingDataDownloader(new SlowDataDownloader()));
 
   
             Console.WriteLine(dataDownloader.DownloadData("id1"));

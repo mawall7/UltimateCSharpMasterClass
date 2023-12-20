@@ -26,6 +26,22 @@ public interface IDataDownloader
         }
     }
 
+    public class PrintingDataDownloader : IDataDownloader
+    {
+        private readonly IDataDownloader _downloader;
+
+        public PrintingDataDownloader(IDataDownloader downloader)
+        {
+            _downloader = downloader;
+        }
+        public string DownloadData(string resourceId)
+        {
+            var data = _downloader.DownloadData(resourceId);
+            Console.WriteLine("data is ready!");
+            return data;
+        }
+    }
+
     public class SlowDataDownloader : IDataDownloader
     {
 
