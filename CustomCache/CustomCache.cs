@@ -16,8 +16,8 @@ namespace CustomCache
             
             if (!_dict.ContainsKey(key))
             {
-                var data = getDataOnFirstTry;
-                _dict.Add(key, getDataOnFirstTry(key));  
+                //var data = getDataOnFirstTry;
+                _dict.Add(key, getDataOnFirstTry(key));  // value = data förutom att returnera värdet körs metoden med olika extensions , implementationer 
                
             }
             return _dict[key];
