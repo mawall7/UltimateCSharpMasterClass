@@ -23,33 +23,14 @@ namespace CookiesCookbook
 
         public void PrintExistingRecipes(IEnumerable<Recipe> allRecipes)
         {
-
-
             if (allRecipes.Any())
             {
 
                 Console.WriteLine("Existing recipes are:" + Environment.NewLine);
 
-                //var joined = String.Join(",", allRecipes);
-
-                ////Console.WriteLine(recepiestransformed.ToString());
-                //foreach (var item in recepiestransformed)
-                //{
-                //    Console.WriteLine(item.description);
-                //}
-
                 var recipestransformed = allRecipes.Select((item, index) => $"****{index}****" + Environment.NewLine + item + Environment.NewLine);
-                //var counter = 1;
+                
                 Console.WriteLine(string.Join(Environment.NewLine, recipestransformed));
-                //    foreach (var recipe in allRecipes)
-                //    {
-                //        Console.WriteLine($"*****{counter}*****");
-                //        Console.WriteLine(recipe);
-                //        Console.WriteLine();
-                //        ++counter;
-                //    }
-                //}
-
             }
         }
 
@@ -58,10 +39,15 @@ namespace CookiesCookbook
             Console.WriteLine("Create a new cookie recipe! " +
                 "Available ingredients are:");
 
-            foreach (var ingredient in _ingredientsRegister.Ingredients)
-            {
-                Console.WriteLine(ingredient.ID + $".{ingredient.Name}.");
-            }
+            //foreach (var ingredient in _ingredientsRegister.Ingredients)
+            //{
+            //    Console.WriteLine(ingredient.ID + $".{ingredient.Name}.");
+            //}
+
+            var ingredientstoprint = _ingredientsRegister.Ingredients
+                .Select(ingredient => ingredient.ID + $".{ingredient.Name}.");
+
+            Console.WriteLine(string.Join(Environment.NewLine, ingredientstoprint));
         }
 
         
