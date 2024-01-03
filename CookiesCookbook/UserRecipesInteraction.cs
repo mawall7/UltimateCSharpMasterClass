@@ -23,23 +23,34 @@ namespace CookiesCookbook
 
         public void PrintExistingRecipes(IEnumerable<Recipe> allRecipes)
         {
-            
+
 
             if (allRecipes.Any())
             {
-                
+
                 Console.WriteLine("Existing recipes are:" + Environment.NewLine);
 
-                var counter = 1;
-                foreach (var recipe in allRecipes)
-                {
-                    Console.WriteLine($"*****{counter}*****");
-                    Console.WriteLine(recipe);
-                    Console.WriteLine();
-                    ++counter;
-                }
-            }
+                //var joined = String.Join(",", allRecipes);
 
+                ////Console.WriteLine(recepiestransformed.ToString());
+                //foreach (var item in recepiestransformed)
+                //{
+                //    Console.WriteLine(item.description);
+                //}
+
+                var recipestransformed = allRecipes.Select((item, index) => $"****{index}****" + Environment.NewLine + item + Environment.NewLine);
+                //var counter = 1;
+                Console.WriteLine(string.Join(Environment.NewLine, recipestransformed));
+                //    foreach (var recipe in allRecipes)
+                //    {
+                //        Console.WriteLine($"*****{counter}*****");
+                //        Console.WriteLine(recipe);
+                //        Console.WriteLine();
+                //        ++counter;
+                //    }
+                //}
+
+            }
         }
 
         public void PromptToCreateRecipe()

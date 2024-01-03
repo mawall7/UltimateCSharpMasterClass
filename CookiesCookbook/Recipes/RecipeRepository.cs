@@ -20,36 +20,38 @@ namespace CookiesCookbook
 
         public List<Recipe> Read(string filePath)
         {
-            List<string> recipesFromFile = _filerepository.Read(filePath);
-            var recipes = new List<Recipe>();
+            //List<string> recipesFromFile = _filerepository.Read(filePath);
+            return  _filerepository.Read(filePath)
+            .Select(RecipeFromString)
+            .ToList();
+            //var recipes = new List<Recipe>();
 
-            if (recipesFromFile is not null)
-            {
+            //if (recipesFromFile is not null)
+            //{
 
-                foreach (var recipeFromFile in recipesFromFile)
-                {
-                    var recipe = RecipeFromString(recipeFromFile);
-                    recipes.Add(recipe);
-                }
-            }
+            //    foreach (var recipeFromFile in recipesFromFile)
+            //    {
+            //        var recipe = RecipeFromString(recipeFromFile);
+            //        recipes.Add(recipe);
+            //    }
+            //}
 
-            return recipes;
+            //return recipes;
         }
 
         private Recipe RecipeFromString(string recipeFromFile)
         {
-            var textualIds = recipeFromFile.Split(Separator);
-            var ingredients = new List<Ingredient>();
-
-            foreach (var textualId in textualIds)
-            {
-                var id = int.Parse(textualId);
-                var ingredient = _ingredientsRegister.GetById(id);
-                ingredients.Add(ingredient);
-            }
-
+            var textualIds = recipeFromFile.Split(Separator); //t.ex: ["1","3","2"] av "1,2,3";
+            var ingredients = textualIds
+                .Select(textualId => int.Parse(textualId)) //genom LINQ select får man en IEnumerable
+                .Select(id => _ingredientsRegister.GetById(id));
+                
             return new Recipe(ingredients);
+            //var mystring = "1,2,3"; mystring.Split(",");
+            //mystring.Select(item => { int i = 0; i++; return $"{i} {item}"; });
         }
+           
+
         public void Write(List<Recipe> recipes, string filePath)
         {
             List<string> recipesAsString = new List<string>();
