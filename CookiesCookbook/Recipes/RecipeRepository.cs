@@ -50,25 +50,39 @@ namespace CookiesCookbook
             //var mystring = "1,2,3"; mystring.Split(",");
             //mystring.Select(item => { int i = 0; i++; return $"{i} {item}"; });
         }
-           
+
 
         public void Write(List<Recipe> recipes, string filePath)
         {
-            List<string> recipesAsString = new List<string>();
-           
-            foreach(Recipe recipe in recipes)
-            {
-                var ridlist = new List<int>();
-                
-                foreach(Ingredient ingredient in recipe.Cookierecipe)
+            var ingredientscollection = recipes
+                .Select(recipe =>
                 {
-                    ridlist.Add(ingredient.ID);
+                    var allids = recipe.Cookierecipe
+                    .Select(ingredient => ingredient.ID);
+                    return string.Join(Separator, recipe.Cookierecipe);
+                }).ToList();
+            _filerepository.Save(ingredientscollection, filePath);
+                
+           
+            //var recipesasstring = string.Join(",", ingredientscollection);
 
-                }
-                   recipesAsString.Add(string.Join(Separator, ridlist));// [1,2],[2,4,5]...
-            }
 
-            _filerepository.Save(recipesAsString, filePath);
+
+            //List<string> recipesAsString = new List<string>();
+
+            //foreach(Recipe recipe in recipes)
+            //{
+            //    var ridlist = new List<int>();
+
+            //    foreach(Ingredient ingredient in recipe.Cookierecipe)
+            //    {
+            //        ridlist.Add(ingredient.ID);
+
+            //    }
+            //       recipesAsString.Add(string.Join(Separator, ridlist));// [1,2],[2,4,5]...
+            //}
+
+            //_filerepository.Save(recipesAsString, filePath);
         }
 
     }
