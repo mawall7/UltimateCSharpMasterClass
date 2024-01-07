@@ -8,6 +8,7 @@ namespace CookiesCookbook
 {
     class Flour : Ingredient, IHeatable 
     {
+        //public override int ID => 2;
         public int Temperature { get; set; }
         public TimeSpan Time { get; set; }
 
@@ -20,7 +21,10 @@ namespace CookiesCookbook
             base.Preparation = BuildPreparation(this) + base.BuildPreparation(this);
         }
 
-        public override string BuildPreparation(Ingredient ingredient) => "Sieve";
+        public override string BuildPreparation(Ingredient ingredient)
+        {
+            return "Sieve";
+        }
         
 
     }

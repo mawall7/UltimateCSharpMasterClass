@@ -24,7 +24,7 @@ namespace CookiesCookbook
         }
         public override string BuildPreparation(Ingredient ingredient)
         {
-            return $"Melt." ; 
+            return "Melt."; 
         }
 
 

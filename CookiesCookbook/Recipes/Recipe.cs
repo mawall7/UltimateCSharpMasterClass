@@ -20,7 +20,8 @@ namespace CookiesCookbook
         {
             foreach (Ingredient item in Cookierecipe)
             {
-                Console.WriteLine(item?.Preparation);
+                Console.WriteLine(item.Preparation);//Console.WriteLine(item?.Preparation);
+
 
             }
         }
@@ -29,7 +30,7 @@ namespace CookiesCookbook
             var steps = new List<string>();
             foreach (var ingredient in Cookierecipe)
             {
-                steps.Add($"{ingredient.Name}. {ingredient.Preparation}");
+                steps.Add($"{ingredient.Preparation}");
             }
 
             return string.Join(Environment.NewLine, steps); //flour.is sieved\butter.is heated. 

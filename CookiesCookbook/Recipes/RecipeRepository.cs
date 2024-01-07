@@ -59,7 +59,7 @@ namespace CookiesCookbook
                 {
                     var allids = recipe.Cookierecipe
                     .Select(ingredient => ingredient.ID);
-                    return string.Join(Separator, recipe.Cookierecipe);
+                    return string.Join(Separator, allids);
                 }).ToList();
             _filerepository.Save(ingredientscollection, filePath);
                 

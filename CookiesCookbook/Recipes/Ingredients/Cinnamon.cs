@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace CookiesCookbook.Recipes.Ingredients
 {
-    class Cinnamon:Spice
+    public class Cinnamon : Ingredient
     {
+        public Cinnamon(int id, string name, int iamount, Measurement imeasurement) : base(id, name, iamount, imeasurement)
+        {
+        }
+
+       
     }
 }

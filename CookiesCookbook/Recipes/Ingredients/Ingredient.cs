@@ -33,6 +33,7 @@ namespace CookiesCookbook
 
     {
 
+        //public virtual int ID { get; }
         public int ID { get; }
         public string Name { get; }
 
@@ -54,19 +55,20 @@ namespace CookiesCookbook
         public virtual string BuildPreparation(Ingredient ingredient) //varför overrida? när du använder både base och den här i t.ex. Butter klassen ?
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append( $"{Amount} {Measurement} of {Name}");
+            builder.Append( $"{Amount} {Measurement} of {Name}.");
             
             if (ingredient is IStirrable stirable)
             {
-                builder.Append($" is stirred until {stirable.Condition}.");
+                builder.Append($" {Name} is stirred until {stirable.Condition}.");
                 
             }
             //if (ingredient is IHeatable && ingredient is IStirrable) { builder.Append("& "); } 
       
             if (ingredient is IHeatable heatable)
             {
-                builder.Append($" is heated at {heatable.Temperature} degrees for {heatable.Time} amount of time.");
+                builder.Append($" {Name} is heated at {heatable.Temperature} degrees for {heatable.Time} amount of time.");
             }
+            builder.Append("is added to the other ingredients.");
             
             return builder.ToString();
             
