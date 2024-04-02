@@ -19,7 +19,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameDataParser", "GameDataP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwitchTuples", "SwitchTuples\SwitchTuples.csproj", "{702ECDEE-2202-4104-B7C1-F90BE36C38AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomCache", "CustomCache\CustomCache.csproj", "{A8B42795-D049-4E28-851B-7E48AC3823E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomCache", "CustomCache\CustomCache.csproj", "{A8B42795-D049-4E28-851B-7E48AC3823E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StarWarsPlanetStats", "StarWarsPlanetStats", "{FF04FB6C-39B0-4121-B1AB-D51DE96CA3C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{5F09554B-6204-4C91-9DFD-AB84BEB18000}"
+	ProjectSection(SolutionItems) = preProject
+		UltimateCSharpMasterClass\ApiReader.cs = UltimateCSharpMasterClass\ApiReader.cs
+		UltimateCSharpMasterClass\IApiReader.cs = UltimateCSharpMasterClass\IApiReader.cs
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumericTypesSuggester", "NumericTypesSuggester\NumericTypesSuggester.csproj", "{FCBF443F-68D1-4812-9D50-BCEB864D9407}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketsDataAggregator", "TicketsDataAggregator\TicketsDataAggregator.csproj", "{66441A2B-485B-43DC-9682-49830230F5D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +67,14 @@ Global
 		{A8B42795-D049-4E28-851B-7E48AC3823E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8B42795-D049-4E28-851B-7E48AC3823E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8B42795-D049-4E28-851B-7E48AC3823E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBF443F-68D1-4812-9D50-BCEB864D9407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBF443F-68D1-4812-9D50-BCEB864D9407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBF443F-68D1-4812-9D50-BCEB864D9407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBF443F-68D1-4812-9D50-BCEB864D9407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66441A2B-485B-43DC-9682-49830230F5D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66441A2B-485B-43DC-9682-49830230F5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66441A2B-485B-43DC-9682-49830230F5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66441A2B-485B-43DC-9682-49830230F5D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +87,10 @@ Global
 		{81F009C3-354A-4D79-B9D3-2E9AC7E4E7CF} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
 		{702ECDEE-2202-4104-B7C1-F90BE36C38AD} = {2EE4A2F4-4BF3-4F25-B326-DFAF333A7C74}
 		{A8B42795-D049-4E28-851B-7E48AC3823E3} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
+		{FF04FB6C-39B0-4121-B1AB-D51DE96CA3C1} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
+		{5F09554B-6204-4C91-9DFD-AB84BEB18000} = {FF04FB6C-39B0-4121-B1AB-D51DE96CA3C1}
+		{FCBF443F-68D1-4812-9D50-BCEB864D9407} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
+		{66441A2B-485B-43DC-9682-49830230F5D9} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {690CD377-02A7-4B08-AEE2-5F43FDB3B90E}

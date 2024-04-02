@@ -14,6 +14,8 @@ namespace CookiesCookbook.DataAccess
             if (File.Exists(path))
             {
                 var data = File.ReadAllText(path);
+                var datatoread = File.OpenRead(path);
+                
                 return TextToStrings(data);
             }
             return null;
