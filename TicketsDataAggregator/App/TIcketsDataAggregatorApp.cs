@@ -59,20 +59,17 @@ namespace DataAccess
                     string domainSuffix = _HandledTextFromData.Substring(_HandledTextFromData.LastIndexOf("."));
                     //string cultureformat = domainSuffix.ReturnCultureFormat();
                     _HandledTextFromData = _HandledTextFromData.Remove(_HandledTextFromData.IndexOf("Visit", _HandledTextFromData.Length - _HandledTextFromData.IndexOf("Visit")));
-                    string folderpath = "C:\\Users\\matte\\source\\repos\\UltimateCSharpMasterClass\\aggregatedTickets\\Tickets";
-                    
-                    TicketTextWriter writer = new TicketTextWriter(folderpath + "\\aggregatedTickets.txt");
+
 
                     foreach (var ticketDto in YieldReturnsDataDto())
                     {
-                        //SaveSubstringToList(ticketDto); //spara direkt istället behöver då inte spara i list 
-                        writer.AddToFile(ticketDto.ToString());
+                        SaveSubstringToList(ticketDto);
 
                     }
                 }
 
 
-                //_TicketData.ForEach(item => Console.WriteLine(item.ToString()));
+                _TicketData.ForEach(item => Console.WriteLine(item.ToString()));
                
                 Console.ReadLine();
 
@@ -131,7 +128,7 @@ namespace DataAccess
         }
             
 
-       //obs SOLID first principle flytta till ansvarig klass
+       
         public void SaveSubstringToList(TicketDataDTO ticketdatadto)
         {
             _TicketData.Add(ticketdatadto);
