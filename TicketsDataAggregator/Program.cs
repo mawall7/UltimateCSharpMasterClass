@@ -8,7 +8,18 @@ namespace TicketsDataAggregator
         static void Main(string[] args)
         {
             string path = "C:\\Users\\matte\\source\\repos\\UltimateCSharpMasterClass\\aggregatedTickets\\Tickets";
-            TicketsDataAggregatorApp ticketaggregator = new TicketsDataAggregatorApp(path);
+           
+            try
+            {
+                TicketsDataAggregatorApp ticketaggregator = new TicketsDataAggregatorApp(path);
+                ticketaggregator.Run();
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("Execution of TicketsDataAggregator Application failed because of an Exception" + e.Message);
+            }
+                
 
         }
     }
