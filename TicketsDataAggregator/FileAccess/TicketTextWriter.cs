@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
+using TicketsDataAggregator.FileAccess;
 
 namespace DataAccess
 {
-    internal class TicketTextWriter
+    internal class TicketTextWriter : ITextWriter
     {
         private string _filenamepath;
 
@@ -12,12 +13,14 @@ namespace DataAccess
             _filenamepath = filenamepath;
         }
 
-        internal void AddToFile(string ticketdata)
+        public void AddToFile(string ticketdata)
         {
             using (StreamWriter writer = File.AppendText(_filenamepath))
             {
                 writer.WriteLine(ticketdata);
             }
         }
+
+      
     }
 }

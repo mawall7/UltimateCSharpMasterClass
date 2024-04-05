@@ -11,6 +11,7 @@ namespace TicketsDataAggregator.FileAccess
     {
         public string ReadAsString(string path)
         {
+            
             PdfDocument document = PdfDocument.Open(path) ;
             StringBuilder builder = new StringBuilder();
             

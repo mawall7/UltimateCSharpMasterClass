@@ -36,38 +36,40 @@ namespace DataAccess
         private string[] _AllPdfFilePaths { get; init; }
         //private List<TicketDataDTO> _TicketData { get; set; } = new List<TicketDataDTO>();
         private string _HandledTextFromData { get; set; }
+        public IReader PdfReader { get; }
+        public ITicketsDataReader TicketsReader { get; }
+        public ITextWriter Writer { get; }
 
         private string folderpath = "C:\\Users\\matte\\source\\repos\\UltimateCSharpMasterClass\\aggregatedTickets\\Tickets";
-        enum TicketMetaData //still nessecary?
-        {
-            Title,
-            Date,
-            Time
-        } 
         
-        public TicketsDataAggregatorApp(string path)
+        public TicketsDataAggregatorApp(IReader pdfReader, ITicketsDataReader ticketsReader, ITextWriter writer, string path)
         {
             _AllPdfFilePaths = Directory.GetFiles(path);
+            PdfReader = pdfReader;
+            TicketsReader = ticketsReader;
+            Writer = writer;
         }
 
         public void Run()
         {
+            List<TicketDataDTO> tickets = new List<TicketDataDTO>();
+            
             try
             {
-                foreach (string filepath in _AllPdfFilePaths)
+                foreach (string filepath in _AllPdfFilePaths) 
                 {
+
+                    //Read each pdf one at a time one pdf can contain more than one tickets
+                    string ticketstext = PdfReader.ReadAsString(filepath); 
+                    //One or more tickets from one pdf converted to string format
                     
-                    PdfFileReader pdfReader = new();
-                    string ticketstext = pdfReader.ReadAsString(filepath);
+                    //convert stringed tickets to DTOs with yield method
+                    //ITextWriter writer = new TicketTextWriter(folderpath + "\\aggregatedTickets.txt");
                     
-                    TicketsDataReader ticketsReader = new(ticketstext);
-                    List<TicketDataDTO> tickets = new();
-                    TicketTextWriter writer = new TicketTextWriter(folderpath + "\\aggregatedTickets.txt");
-                   
-                    foreach (var ticketDto in ticketsReader.YieldReturnsDataDto())
+                    foreach (var ticketDto in TicketsReader.YieldReturnsDataAsDtos(ticketstext))
                     {
-                        tickets.Add(ticketDto);
-                        writer.AddToFile(ticketDto.ToString());
+                        //tickets.Add(ticketDto);
+                        Writer.AddToFile(ticketDto.ToString());
                     }
                 }
 
@@ -79,9 +81,10 @@ namespace DataAccess
 
             catch (InvalidOperationException e)
             {
-                Console.WriteLine("The pdf files could not be opened from the tickets directory. Files may not exist or the wrong path was specified " + e.Message);
+                Console.WriteLine("The pdf files could not be opened from the tickets directory. Files may not exist or something unnexpected happened during file processing." + e.Message);
             }
-            Console.WriteLine("The ticket/tickets were saved successfully to file");
+            Console.WriteLine("The ticket/tickets were saved successfully to file.");
+       
             Console.ReadLine();
         }
 
