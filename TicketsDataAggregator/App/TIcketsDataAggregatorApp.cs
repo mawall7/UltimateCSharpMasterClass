@@ -6,6 +6,8 @@ using TicketsDataAggregator;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using TicketsDataAggregator.FileAccess;
+using TicketsDataAggregator.DataAccess;
 
 namespace DataAccess
 {
@@ -17,7 +19,7 @@ namespace DataAccess
     public class TicketsDataAggregatorApp
     {
         private string[] _AllFilepaths { get; init; }
-        private List<TicketDataDTO> _TicketData { get; set; } = new List<TicketDataDTO>();
+        //private List<TicketDataDTO> _TicketData { get; set; } = new List<TicketDataDTO>();
         private string _HandledTextFromData { get; set; }
 
         enum TicketMetaData //still nessecary?
@@ -30,8 +32,6 @@ namespace DataAccess
         public TicketsDataAggregatorApp(string path)
         {
             _AllFilepaths = Directory.GetFiles(path);
-            
-           
         }
 
         public void Run()
@@ -45,34 +45,32 @@ namespace DataAccess
                     //2.list<dtos> ticketList = DataReader.GetTicketsFromDocuments(list<string>) 
                     //2.foreach ticket in ticketList 
                     //{
-                         //DTOdata ticket (DTOdata)ticket;
-                         //listofdtos.Add(ticket)
+                    //DTOdata ticket (DTOdata)ticket;
+                    //listofdtos.Add(ticket)
                     //}
-                    //3. litsofdtos.foreach(item => Printer.Print(item.ToString())
-
-                    PdfDocument document = PdfDocument.Open(filenamepath);
+                    //3. litsofdtos.foreach(item => TicketFileWriter.AddText(item.ToString())
                    
-                    Console.WriteLine(document.GetPage(1).Text);
-                    string text = document.GetPage(1).Text;
+                    //Kan vara enklare om all text för alla pdf filer först läses som en string
+                    //och TicketReadern sedan använder hela texten för samtliga biljetter 
+                    //och returnerar en List<TicketDTO> ? yield ger ett rörigt intryck
                     
-                    _HandledTextFromData = text.RemoveSubstring("Thank you for choosing our cinema! Here are yourtickets:");
-                    string domainSuffix = _HandledTextFromData.Substring(_HandledTextFromData.LastIndexOf("."));
-                    //string cultureformat = domainSuffix.ReturnCultureFormat();
-                    _HandledTextFromData = _HandledTextFromData.Remove(_HandledTextFromData.IndexOf("Visit", _HandledTextFromData.Length - _HandledTextFromData.IndexOf("Visit")));
+                    var pdfReader = new PfdFileReader();
+                    string ticketstext = pdfReader.Read(filenamepath);
+                    TicketsDataReader ticketsReader= new TicketsDataReader(ticketstext);
+                    List<TicketDataDTO> tickets = new();
+                    
                     string folderpath = "C:\\Users\\matte\\source\\repos\\UltimateCSharpMasterClass\\aggregatedTickets\\Tickets";
                     
                     TicketTextWriter writer = new TicketTextWriter(folderpath + "\\aggregatedTickets.txt");
-
-                    foreach (var ticketDto in YieldReturnsDataDto())
+               
+                    foreach (var ticketDto in ticketsReader.YieldReturnsDataDto())
                     {
-                        //SaveSubstringToList(ticketDto); //spara direkt istället behöver då inte spara i list 
+                        tickets.Add(ticketDto);
                         writer.AddToFile(ticketDto.ToString());
-
                     }
                 }
 
-
-                //_TicketData.ForEach(item => Console.WriteLine(item.ToString()));
+                     //_TicketData.ForEach(item => Console.WriteLine(item.ToString()));
                
                 Console.ReadLine();
 
@@ -82,61 +80,63 @@ namespace DataAccess
             {
                 Console.WriteLine("the pdf files could not be opened from the tickets directory. Files may not exist or the wrong path was specified" + e.Message);
             }
-
+            Console.WriteLine("The ticket/tickets were saved successfully to file");
             Console.ReadLine();
         }
 
-        public IEnumerable<TicketDataDTO> YieldReturnsDataDto()
-        {
-            Dictionary<string, Func<string, int>> datadictionary = new Dictionary<string, Func<string, int>>()
-            {
-                {"Title", (HandledTextFromData) => HandledTextFromData.IndexOf("Title") },
-                {"Date",  (HandledTextFromData) => HandledTextFromData.IndexOf("Date") },
-                {"Time", (HandledTextFromData)  => HandledTextFromData.IndexOf("Time") }
-            };
+        //public IEnumerable<TicketDataDTO> YieldReturnsDataDto()
+        //{
+        //    Dictionary<string, Func<string, int>> datadictionary = new Dictionary<string, Func<string, int>>()
+        //    {
+        //        {"Title", (HandledTextFromData) => HandledTextFromData.IndexOf("Title") },
+        //        {"Date",  (HandledTextFromData) => HandledTextFromData.IndexOf("Date") },
+        //        {"Time", (HandledTextFromData)  => HandledTextFromData.IndexOf("Time") }
+        //    };
             
-            while (_HandledTextFromData.Length > 0)
-            {
+        //    while (_HandledTextFromData.Length > 0)
+        //    {
               
-                TicketDataDTO data = new TicketDataDTO();
+        //        TicketDataDTO data = new TicketDataDTO();
                 
-                int startIndex = 0;
-                data.Title = HandleData(startIndex,1, datadictionary).RemoveSubstring("Title:");
+        //        int startIndex = 0;
+        //        data.Title = HandleData(startIndex,1, datadictionary).RemoveSubstring("Title:");
               
                 
-                string date = HandleData(startIndex,2, datadictionary).RemoveSubstring("Date:");
-                string time = HandleData(startIndex,0, datadictionary).RemoveSubstring("Time:");
-                string timedatedata = date +" "+ time; //= HandleData(startIndex, 2, datadictionary).RemoveSubstring("Date:");
-                DateTime dateTime = new DateTime();
+        //        string date = HandleData(startIndex,2, datadictionary).RemoveSubstring("Date:");
+        //        string time = HandleData(startIndex,0, datadictionary).RemoveSubstring("Time:");
+        //        string timedatedata = date +" "+ time; //= HandleData(startIndex, 2, datadictionary).RemoveSubstring("Date:");
+        //        DateTime dateTime = new DateTime();
                 
-                DateTime.TryParse(timedatedata, out dateTime);
-                data.DateAndTime = dateTime; 
+        //        DateTime.TryParse(timedatedata, out dateTime);
+        //        data.DateAndTime = dateTime; 
                 
 
-                yield return data;
-            }
-        }
+        //        yield return data;
+        //    }
+        //}
        
         //namnet bör bättre beskriva metoden
-        public string HandleData(int startDataIndex, int endDictIndex, Dictionary<string, Func<string, int>> dataDictionary)
-        {
+        //public string HandleData(int startDataIndex, int endDictIndex, Dictionary<string, Func<string, int>> dataDictionary)
+        //{
             
-            int endIndex = dataDictionary.ElementAt(endDictIndex).Value.Invoke(_HandledTextFromData);
-            endIndex = endIndex > 1 ? endIndex : _HandledTextFromData.Length; 
+        //    int endIndex = dataDictionary.ElementAt(endDictIndex).Value.Invoke(_HandledTextFromData);
+        //    endIndex = endIndex > 1 ? endIndex : _HandledTextFromData.Length; 
             
-            string result = _HandledTextFromData.ReturnsSubstringFromIndex(startDataIndex, endIndex);
-            _HandledTextFromData = _HandledTextFromData.Remove(startDataIndex, endIndex);
+        //    string result = _HandledTextFromData.ReturnsSubstringFromIndex(startDataIndex, endIndex);
+        //    _HandledTextFromData = _HandledTextFromData.Remove(startDataIndex, endIndex);
             
-            return result;
-        }
+        //    return result;
+        //}
+
+      
             
 
        //obs SOLID first principle flytta till ansvarig klass
-        public void SaveSubstringToList(TicketDataDTO ticketdatadto)
-        {
-            _TicketData.Add(ticketdatadto);
-            //TicketDataArray[1] = 
-        }
+        //public void SaveSubstringToList(TicketDataDTO ticketdatadto)
+        //{
+        //    _TicketData.Add(ticketdatadto);
+        //}
+            
 
      
 

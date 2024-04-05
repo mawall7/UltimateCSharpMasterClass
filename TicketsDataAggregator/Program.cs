@@ -17,10 +17,10 @@ namespace TicketsDataAggregator
 
             catch (Exception e)
             {
-                Console.WriteLine("Execution of TicketsDataAggregator Application failed because of an Exception" + e.Message);
+                Console.WriteLine("Execution of TicketsDataAggregator Application failed because of an Exception " +  e.Message);
             }
-                
 
         }
     }
 }
+                
