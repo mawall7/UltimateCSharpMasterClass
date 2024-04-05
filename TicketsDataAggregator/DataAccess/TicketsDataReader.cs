@@ -9,7 +9,7 @@ namespace TicketsDataAggregator.DataAccess
 {
     class TicketsDataReader : ITicketsDataReader
     {
-        private string _HandledTextFromData;
+        private string _HandledRawTextFromData;
 
         public TicketsDataReader()
         {
@@ -18,60 +18,90 @@ namespace TicketsDataAggregator.DataAccess
 
         private void FormatTicketData()
         {
-             _HandledTextFromData = _HandledTextFromData.RemoveSubstring("Thank you for choosing our cinema! Here are yourtickets:");
-             //string domainSuffix = _HandledTextFromData.Substring(_HandledTextFromData.LastIndexOf("."));
+             _HandledRawTextFromData = _HandledRawTextFromData.RemoveSubstring("Thank you for choosing our cinema! Here are yourtickets:");
+             //string domainSuffix = _HandledRawTextFromData.Substring(_HandledRawTextFromData.LastIndexOf("."));
             //string cultureformat = domainSuffix.ReturnCultureFormat();
-             _HandledTextFromData = _HandledTextFromData.Remove(_HandledTextFromData.IndexOf("Visit", _HandledTextFromData.Length - _HandledTextFromData.IndexOf("Visit")));
+             _HandledRawTextFromData = _HandledRawTextFromData.Remove(_HandledRawTextFromData.IndexOf("Visit", _HandledRawTextFromData.Length - _HandledRawTextFromData.IndexOf("Visit")));
 
         }
 
-     
         public IEnumerable<TicketDataDTO> YieldReturnsDataAsDtos(string ticketData)  //needs parameter? is run until _HandledText is empty.
         {
-            _HandledTextFromData = ticketData;
+            _HandledRawTextFromData = ticketData;
             FormatTicketData();
             
             Dictionary<string, Func<string, int>> datadictionary = new Dictionary<string, Func<string, int>>()
             {
                 {"Title", (HandledTextFromData) => HandledTextFromData.IndexOf("Title") },
                 {"Date",  (HandledTextFromData) => HandledTextFromData.IndexOf("Date") },
-                {"Time", (HandledTextFromData)  => HandledTextFromData.IndexOf("Time") }
+                {"Time",  (HandledTextFromData)  => HandledTextFromData.IndexOf("Time") }
             };
 
-            while (_HandledTextFromData.Length > 0)  //while all tickets in one file are extracted from pdf
+            while (_HandledRawTextFromData.Length > 0)  //while all tickets in one file are extracted from pdf
             {
 
                 int startIndex = 0;
-                TicketDataDTO data = new TicketDataDTO();
+                
+                TicketDataDTO ticketDTO = new TicketDataDTO();
 
-                // data.Title = GetData("Title");
-                data.Title = ReturnDataByName(startIndex, 1, datadictionary).RemoveSubstring("Title:");
-                string date = ReturnDataByName(startIndex, 2, datadictionary).RemoveSubstring("Date:");
-                string time = ReturnDataByName(startIndex, 0, datadictionary).RemoveSubstring("Time:");
-                string timedatedata = date + " " + time; //= HandleData(startIndex, 2, datadictionary).RemoveSubstring("Date:");
-                DateTime dateTime = new DateTime();
+                //ToDo Refactor like : data.Title = GetData("Title");
+                List<string> bufferedticket = new(3);
+               
+                foreach(var item in datadictionary)
+                {
+                    string ticketdata = ReturnDataByName(item.Key);
+                    bufferedticket.Add(ticketdata);   
+                }
 
-                DateTime.TryParse(timedatedata, out dateTime);
-                data.DateAndTime = dateTime;
+                ticketDTO = (TicketDataDTO)bufferedticket;
+              
+                yield return ticketDTO;
 
-
-                yield return data;
             }
         }
 
         //Unspecifik name should be more specific like ReturnDataByName(string name //"Title")
-        public string ReturnDataByName(int startDataIndex, int endDictIndex, Dictionary<string, Func<string, int>> dataDictionary)
-        {
+        //public string ReturnDataByName(int startDataIndex, int endDictIndex, Dictionary<string, Func<string, int>> dataDictionary)
+        //{
 
-            int endIndex = dataDictionary.ElementAt(endDictIndex).Value
-                .Invoke(_HandledTextFromData);
-            endIndex = endIndex > 1 ? endIndex : _HandledTextFromData.Length;
+        //    int endIndex = dataDictionary.ElementAt(endDictIndex).Value
+        //        .Invoke(_HandledRawTextFromData);
+        //    endIndex = endIndex > 1 ? endIndex : _HandledRawTextFromData.Length;
             
-            string result = _HandledTextFromData.ReturnsSubstringFromIndex(startDataIndex, endIndex);
-            _HandledTextFromData = _HandledTextFromData.Remove(startDataIndex, endIndex);
+        //    string result = _HandledRawTextFromData.ReturnsSubstringFromIndex(startDataIndex, endIndex);
+        //    _HandledRawTextFromData = _HandledRawTextFromData.Remove(startDataIndex, endIndex);
+
+        //    return result;
+        //}
+
+        public string ReturnDataByName(string dataName)
+        {
+            int startDataIndex = 0;
+            string endDataLabel = default;
+            
+            switch (dataName)
+            {
+                case "Title": 
+                endDataLabel  = "Date";
+                break;
+                case "Date": 
+                endDataLabel = "Time";
+                break;
+                case "Time":
+                endDataLabel ="Title";
+                break;
+            }
+            int endIndex = _HandledRawTextFromData.IndexOf(endDataLabel);
+           
+            endIndex = endIndex > 1 ? endIndex : _HandledRawTextFromData.Length;
+
+            string result = _HandledRawTextFromData.ReturnsSubstringFromIndex(startDataIndex, endIndex);
+            _HandledRawTextFromData = _HandledRawTextFromData.Remove(startDataIndex, endIndex);
 
             return result;
         }
+
+      
 
 
     }

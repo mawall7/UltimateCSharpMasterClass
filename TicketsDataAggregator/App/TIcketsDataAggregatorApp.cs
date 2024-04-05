@@ -60,15 +60,14 @@ namespace DataAccess
                 {
 
                     //Read each pdf one at a time one pdf can contain more than one tickets
-                    string ticketstext = PdfReader.ReadAsString(filepath); 
+                    string ticketstext = PdfReader.ReadAsString(filepath);
                     //One or more tickets from one pdf converted to string format
-                    
                     //convert stringed tickets to DTOs with yield method
-                    //ITextWriter writer = new TicketTextWriter(folderpath + "\\aggregatedTickets.txt");
-                    
+
+                    //alternativ är List<TicketDTO> tickets = TicketReader.ReturnTicketsFromString(string rawstringtickets)
                     foreach (var ticketDto in TicketsReader.YieldReturnsDataAsDtos(ticketstext))
                     {
-                        //tickets.Add(ticketDto);
+                        //tickets.Add(ticketDto); 
                         Writer.AddToFile(ticketDto.ToString());
                     }
                 }
