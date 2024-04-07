@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace TicketsDataAggregator.DataAccess
            
         }
 
+        //Possible TODO FormatTicket, makes sense to have as extension method, doesnt not follow SOLID single responsibility, as extention method or class and other formating is also used in TicketDTO. 
         private void FormatTicketData()
         {
              _HandledRawTextFromData = _HandledRawTextFromData.RemoveSubstring("Thank you for choosing our cinema! Here are yourtickets:");
@@ -25,7 +27,34 @@ namespace TicketsDataAggregator.DataAccess
 
         }
 
-        public IEnumerable<TicketDataDTO> YieldReturnsDataAsDtos(string ticketData)  //needs parameter? is run until _HandledText is empty.
+        //ToDo Use Split with separator array is a much simpler way!
+        public IEnumerable<TicketDataDTO> SimplerYieldReturnsDataAsDtos(string ticketData)
+        {
+            Dictionary<string, string> dictionary = new()
+            {
+                { ".com", "en-US" },
+                { ".fr", "fr-FR" },
+                { ".jp", "ja-JP" }
+
+            }; 
+
+            var separator = new string[]{ "Title:", "Date:", "Time:", "Visit us" };
+            var ticketssplit = ticketData.Split(separator, StringSplitOptions.None);
+            for (int i = 1; i < ticketssplit.Count() -1; i = i+3)
+            {
+                var title = ticketssplit[i];
+                var date = ticketssplit[i + 1];
+                var time = ticketssplit[i + 2];
+                var visitus = ticketssplit.Last();
+               
+                var languagecode = visitus.Substring(visitus.LastIndexOf("."));
+                DateTime dateTime = DateTime.Parse(date + " " + time, new CultureInfo(dictionary[languagecode]), System.Globalization.DateTimeStyles.None);
+                yield return new TicketDataDTO() { Title = title, DateAndTime = dateTime};
+            }
+        }
+
+            
+        public IEnumerable<TicketDataDTO> YieldReturnsDataAsDtos(string ticketData)
         {
             _HandledRawTextFromData = ticketData;
             FormatTicketData();
@@ -40,11 +69,9 @@ namespace TicketsDataAggregator.DataAccess
             while (_HandledRawTextFromData.Length > 0)  //while all tickets in one file are extracted from pdf
             {
 
-                int startIndex = 0;
-                
                 TicketDataDTO ticketDTO = new TicketDataDTO();
 
-                //ToDo Refactor like : data.Title = GetData("Title");
+                //* Possible ToDo Refactor like : data.Title = GetData("Title")
                 List<string> bufferedticket = new(3);
                
                 foreach(var item in datadictionary)
@@ -53,7 +80,7 @@ namespace TicketsDataAggregator.DataAccess
                     bufferedticket.Add(ticketdata);   
                 }
 
-                ticketDTO = (TicketDataDTO)bufferedticket;
+                ticketDTO = (TicketDataDTO)bufferedticket; // * Possible refactor 
               
                 yield return ticketDTO;
 

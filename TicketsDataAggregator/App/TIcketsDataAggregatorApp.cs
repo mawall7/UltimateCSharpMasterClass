@@ -65,7 +65,7 @@ namespace DataAccess
                     //convert stringed tickets to DTOs with yield method
 
                     //alternativ är List<TicketDTO> tickets = TicketReader.ReturnTicketsFromString(string rawstringtickets)
-                    foreach (var ticketDto in TicketsReader.YieldReturnsDataAsDtos(ticketstext))
+                    foreach (var ticketDto in TicketsReader.SimplerYieldReturnsDataAsDtos(ticketstext))
                     {
                         //tickets.Add(ticketDto); 
                         Writer.AddToFile(ticketDto.ToString());
