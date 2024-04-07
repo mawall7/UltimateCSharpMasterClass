@@ -8,6 +8,7 @@ namespace TicketsDataAggregator.FileAccess
 {
     public interface IReader
     {
-        public string ReadAsString(string path);
+        //public string ReadAsString(string path);
+        public IEnumerable<string> ReadAsString(string path);
     }
 }

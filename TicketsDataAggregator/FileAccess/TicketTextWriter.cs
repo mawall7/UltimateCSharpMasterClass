@@ -15,10 +15,9 @@ namespace DataAccess
 
         public void AddToFile(string ticketdata)
         {
-            using (StreamWriter writer = File.AppendText(_filenamepath))
-            {
-                writer.WriteLine(ticketdata);
-            }
+            using StreamWriter writer = File.AppendText(_filenamepath);
+            writer.WriteLine(ticketdata);
+            writer.Close();
         }
 
       

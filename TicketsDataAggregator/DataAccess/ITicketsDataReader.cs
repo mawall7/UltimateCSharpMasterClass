@@ -9,7 +9,7 @@ namespace TicketsDataAggregator.DataAccess
     public interface ITicketsDataReader
     {
         //public IEnumerable<TicketDataDTO> YieldReturnsDataAsDtos(string ticketsdata);
-        public IEnumerable<TicketDataDTO> SimplerYieldReturnsDataAsDtos(string ticketsdata);
+        public IEnumerable<string> SimplerYieldReturnsDataAsString(string ticketsdata);
         
     }
 }

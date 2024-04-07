@@ -1,28 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UglyToad.PdfPig;
+using UglyToad.PdfPig.Content;
 
 namespace TicketsDataAggregator.FileAccess
 {
     public class PdfFileReader : IReader
     {
-        public string ReadAsString(string path)
+        public IEnumerable<string> ReadAsString(string path)
         {
-            
-            PdfDocument document = PdfDocument.Open(path) ;
-            StringBuilder builder = new StringBuilder();
-            
-            foreach (var page in document.GetPages())
+            foreach(var pdfdocument in Directory.GetFiles(path, "*.pdf"))
             {
-                builder.Append(page.Text);
+                using PdfDocument document = PdfDocument.Open(pdfdocument);
+
+                Page page = document.GetPage(1);
+
+                yield return page.Text;
             }
 
-            return builder.ToString(); //document.GetPage(1).Text;
 
-         }
+            //StringBuilder builder = new StringBuilder();
+
+            //foreach (var page in document.GetPages())
+            //{
+            //    builder.Append(page.Text);
+            //}
+
+            //return builder.ToString(); //document.GetPage(1).Text;
+
+        }
     }
 }
             

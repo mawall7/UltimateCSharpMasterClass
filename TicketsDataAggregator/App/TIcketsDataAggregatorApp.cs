@@ -23,6 +23,7 @@ using System.Linq;
 using System.Globalization;
 using TicketsDataAggregator.FileAccess;
 using TicketsDataAggregator.DataAccess;
+using System.Text;
 
 namespace DataAccess
 {
@@ -30,50 +31,64 @@ namespace DataAccess
     {
         public string Read(string path);
     }
+    
+    //Reads each pdf one at a time one pdf can contain more than one tickets
+    //converts stringed tickets to DTOs with yield method
 
     public class TicketsDataAggregatorApp
     {
-        private string[] _AllPdfFilePaths { get; init; }
+        private string[] _AllPdfFilePaths { get; set; }
         //private List<TicketDataDTO> _TicketData { get; set; } = new List<TicketDataDTO>();
         private string _HandledTextFromData { get; set; }
         public IReader PdfReader { get; }
         public ITicketsDataReader TicketsReader { get; }
         public ITextWriter Writer { get; }
 
-        private string folderpath = "C:\\Users\\matte\\source\\repos\\UltimateCSharpMasterClass\\aggregatedTickets\\Tickets";
-        
+        public string Path { get; init; }
         public TicketsDataAggregatorApp(IReader pdfReader, ITicketsDataReader ticketsReader, ITextWriter writer, string path)
         {
-            _AllPdfFilePaths = Directory.GetFiles(path);
             PdfReader = pdfReader;
             TicketsReader = ticketsReader;
             Writer = writer;
+            Path = path;
         }
 
         public void Run()
         {
-            List<TicketDataDTO> tickets = new List<TicketDataDTO>();
             
             try
             {
-                foreach (string filepath in _AllPdfFilePaths) 
+                _AllPdfFilePaths = Directory.GetFiles(Path);
+
+                //ToDo strings[] = Reader.Read(filepath) metod som returnerar
+                //strings istället för DTOs. Det är onödigt att klassen är beroende av ticketDTO klassen. 
+                foreach (string tickets in PdfReader.ReadAsString(Path))
                 {
 
-                    //Read each pdf one at a time one pdf can contain more than one tickets
-                    string ticketstext = PdfReader.ReadAsString(filepath);
-                    //One or more tickets from one pdf converted to string format
-                    //convert stringed tickets to DTOs with yield method
-
-                    //alternativ är List<TicketDTO> tickets = TicketReader.ReturnTicketsFromString(string rawstringtickets)
-                    foreach (var ticketDto in TicketsReader.SimplerYieldReturnsDataAsDtos(ticketstext))
-                    {
-                        //tickets.Add(ticketDto); 
-                        Writer.AddToFile(ticketDto.ToString());
-                    }
+                    //2 alternativ med yield // alternativ 1 med string.Join:
+                    var ticketsfromdocument = TicketsReader.SimplerYieldReturnsDataAsString(tickets);
+                    Writer.AddToFile(string.Join(Environment.NewLine,ticketsfromdocument));
+                    
+                    //alternativ 2 med ticketDTO:
+                    //foreach (var ticketDto in TicketsReader.SimplerYieldReturnsDataAsDtos(ticketstext))
+                    //{
+                    //    Writer.AddToFile(ticketDto.ToString());
+                    //}
                 }
+                
+                //foreach (string filepath in Directory.GetFiles(Path))
+                //{
 
-                     //_TicketData.ForEach(item => Console.WriteLine(item.ToString()));
-               
+                //    string ticketstext = PdfReader.ReadAsString(filepath);
+
+
+                //    foreach (var ticketDto in TicketsReader.SimplerYieldReturnsDataAsDtos(ticketstext))
+                //    {
+                //        Writer.AddToFile(ticketDto.ToString());
+                //    }
+                //}
+
+
                 Console.ReadLine();
 
             }
@@ -82,7 +97,7 @@ namespace DataAccess
             {
                 Console.WriteLine("The pdf files could not be opened from the tickets directory. Files may not exist or something unnexpected happened during file processing." + e.Message);
             }
-            Console.WriteLine("The ticket/tickets were saved successfully to file.");
+            Console.WriteLine($"The ticket/tickets were saved successfully to file. FilePath: {Path}" );
        
             Console.ReadLine();
         }

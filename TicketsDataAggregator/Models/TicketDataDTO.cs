@@ -18,7 +18,7 @@ namespace TicketsDataAggregator
       
         public override string ToString()
         {
-            return String.Format("{0, -25} {1, -25} {2, -25}", Title, "|" + Date, "|" + Time);
+            return String.Format("{0, -40} {1, 0} {2, 0}", Title, "|" + Date, "|" + Time);
 
         }
 
