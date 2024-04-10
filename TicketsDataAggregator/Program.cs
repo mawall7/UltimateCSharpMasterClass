@@ -11,19 +11,19 @@ namespace TicketsDataAggregator
             private static readonly string _folderpath = @"C:\Users\matte\source\repos\UltimateCSharpMasterClass\aggregatedTickets\Tickets\";
             private static readonly string _textfilename = "aggregatedTickets.txt";
        
-        static void Main(string[] args)
+        static void Main()
         {
-            
               try
             {
-              
-                    TicketsDataAggregatorApp ticketaggregator = 
-                        new TicketsDataAggregatorApp(
-                        new PdfFileReader(),
-                        new TicketsDataReader(),
-                        new TicketTextWriter(Path.Combine(_folderpath, _textfilename)),
-                        _folderpath);
-                    ticketaggregator.Run();
+         
+                TicketsDataAggregatorApp ticketaggregator = 
+                    new TicketsDataAggregatorApp(
+                    new PdfFileReader(),
+                    new TicketsDataReader(),
+                    new TicketTextWriter(Path.Combine(_folderpath, _textfilename)),
+                    _folderpath);
+                    
+                ticketaggregator.Run();
             }
 
             catch (Exception e)
