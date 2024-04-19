@@ -27,12 +27,12 @@ namespace DiceGame
         {
             _result = _dice.Roll();
 
-            _userCommunication.ShowMessage($"Dice rolled. Guess what number it shows in {_tries} tries.");
+            _userCommunication.ShowMessage(String.Format(Resource.DiceRolledMessage,_tries));
 
             while (_tries > 0)
             {
 
-                var guess = _userCommunication.ReadInteger("Enter a number");
+                var guess = _userCommunication.ReadInteger(Resource.EnterNumberMessage);
                 _tries--;
 
                 if (IsRightGuess(guess))
@@ -48,7 +48,7 @@ namespace DiceGame
                 return GameResult.Loss;
         }
         
-        internal void PrintResult(GameResult gameResult)
+        public void PrintResult(GameResult gameResult)
         {
             string message = gameResult == GameResult.Victory ? "You win" : "You loose";
             _userCommunication.ShowMessage(message);

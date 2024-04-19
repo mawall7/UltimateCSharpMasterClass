@@ -48,6 +48,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FibonacciGenerator", "Fibon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceGame", "DiceGame\DiceGame.csproj", "{856518AF-978F-4CF9-8AA9-BAE66DC64716}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessingGameTests", "GuessingGameTests\GuessingGameTests.csproj", "{714C12AC-6471-4386-BA0F-1136EA84C739}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +108,10 @@ Global
 		{856518AF-978F-4CF9-8AA9-BAE66DC64716}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{856518AF-978F-4CF9-8AA9-BAE66DC64716}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{856518AF-978F-4CF9-8AA9-BAE66DC64716}.Release|Any CPU.Build.0 = Release|Any CPU
+		{714C12AC-6471-4386-BA0F-1136EA84C739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{714C12AC-6471-4386-BA0F-1136EA84C739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{714C12AC-6471-4386-BA0F-1136EA84C739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{714C12AC-6471-4386-BA0F-1136EA84C739}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{9AB28932-7229-494A-8F72-255917B63FDF} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
 		{4E893577-2A53-46B7-91AC-89291A84ED3C} = {9AB28932-7229-494A-8F72-255917B63FDF}
 		{856518AF-978F-4CF9-8AA9-BAE66DC64716} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
+		{714C12AC-6471-4386-BA0F-1136EA84C739} = {063E7CD3-C45D-4E17-A427-FC2F7352BDE9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {690CD377-02A7-4B08-AEE2-5F43FDB3B90E}
