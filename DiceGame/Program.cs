@@ -9,10 +9,10 @@ namespace DiceGame
         {
             //int tries = 3; // move to gamesession class
             Dice dice = new(new Random());
-            Game gamesession = new Game(dice);
+            Game gamesession = new Game(dice, new ConsoleUserCommunication());
           
             GameResult gameResult = gamesession.Play();
-            Game.PrintResult(gameResult);
+            gamesession.PrintResult(gameResult);
 
             Console.ReadKey();
 

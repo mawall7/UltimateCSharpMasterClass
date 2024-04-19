@@ -1,41 +1,23 @@
-﻿using System;
+﻿using DiceGame.UserCommunication;
+using System;
 
 namespace DiceGame
 {
+
     public class Game
     {
-        public readonly Dice _dice;
+        public readonly IDice _dice;
+
+        private IUserCommunication _userCommunication;
 
         private int _tries = 3;
 
         public int _result { get; set; }
-        public Game(Dice dice)
+        public Game(IDice dice, IUserCommunication userCommunication)
         {
             _dice = dice;
+            _userCommunication = userCommunication;
         }
-
-        //public void PlayDice()
-        //{
-        //    _result = _dice.Roll();
-        //    Console.WriteLine($"Dice rolled. Guess what number it shows in {_tries} tries.");
-
-        //}
-
-        //public bool Guess() //Refactor to Separate ReadMethod
-        //{
-
-        //    int guess = default;
-        //    string guesstring = default;
-
-        //    Console.WriteLine("Make a guess");
-        //    do
-        //    {
-        //        guesstring = Console.ReadLine();
-        //    }
-        //    while (int.TryParse(guesstring, out guess) == false);
-
-        //    return guess.Equals(_result) ? true : false;
-        //}
 
         public bool IsRightGuess(int guess)
         {
@@ -44,13 +26,13 @@ namespace DiceGame
         public GameResult Play()
         {
             _result = _dice.Roll();
-            Console.WriteLine($"Dice rolled. Guess what number it shows in {_tries} tries.");
+
+            _userCommunication.ShowMessage($"Dice rolled. Guess what number it shows in {_tries} tries.");
 
             while (_tries > 0)
             {
 
-                //var guess = Guess();
-                var guess = ConsoleReader.ReadInteger("Enter a number");
+                var guess = _userCommunication.ReadInteger("Enter a number");
                 _tries--;
 
                 if (IsRightGuess(guess))
@@ -60,16 +42,16 @@ namespace DiceGame
                 }
                 else 
                 {
-                    Console.WriteLine("Wrong number");
+                    _userCommunication.ShowMessage("Wrong number");
                 }
             }
                 return GameResult.Loss;
         }
         
-        internal static void PrintResult(GameResult gameResult)
+        internal void PrintResult(GameResult gameResult)
         {
             string message = gameResult == GameResult.Victory ? "You win" : "You loose";
-            Console.WriteLine(message);
+            _userCommunication.ShowMessage(message);
         }
         
                     

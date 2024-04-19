@@ -2,7 +2,7 @@
 
 namespace DiceGame
 {
-    public class Dice
+    public class Dice : IDice
     {
         private Random Random { get; }
         private int _min = 1;
