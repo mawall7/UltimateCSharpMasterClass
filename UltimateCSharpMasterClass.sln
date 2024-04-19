@@ -44,7 +44,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnumerableExtensions", "EnumerableExtensions\EnumerableExtensions.csproj", "{4E893577-2A53-46B7-91AC-89291A84ED3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciGenerator", "FibonacciGenerator\FibonacciGenerator.csproj", "{67E838DA-1DD6-42FB-9C68-AF54B76CAA55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FibonacciGenerator", "FibonacciGenerator\FibonacciGenerator.csproj", "{67E838DA-1DD6-42FB-9C68-AF54B76CAA55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceGame", "DiceGame\DiceGame.csproj", "{856518AF-978F-4CF9-8AA9-BAE66DC64716}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +102,10 @@ Global
 		{67E838DA-1DD6-42FB-9C68-AF54B76CAA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67E838DA-1DD6-42FB-9C68-AF54B76CAA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67E838DA-1DD6-42FB-9C68-AF54B76CAA55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{856518AF-978F-4CF9-8AA9-BAE66DC64716}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{856518AF-978F-4CF9-8AA9-BAE66DC64716}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{856518AF-978F-4CF9-8AA9-BAE66DC64716}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{856518AF-978F-4CF9-8AA9-BAE66DC64716}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{A6DFCB04-73B2-4CD3-B377-4D7BAB4BA7E6} = {063E7CD3-C45D-4E17-A427-FC2F7352BDE9}
 		{9AB28932-7229-494A-8F72-255917B63FDF} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
 		{4E893577-2A53-46B7-91AC-89291A84ED3C} = {9AB28932-7229-494A-8F72-255917B63FDF}
+		{856518AF-978F-4CF9-8AA9-BAE66DC64716} = {11A7604D-E371-411F-9C02-C7FDBA15538A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {690CD377-02A7-4B08-AEE2-5F43FDB3B90E}
