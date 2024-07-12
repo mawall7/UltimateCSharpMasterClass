@@ -11,17 +11,16 @@ namespace GuessingGameTests
     {
         private Mock<IDice> _diceMock;
         private Mock<IUserCommunication> _userCommunicationMock;
-        private Game _cut;
+        private DiceGameApp _cut;
 
         [SetUp]
         public void SetUp()
         {
             _diceMock = new Mock<IDice>();
             _userCommunicationMock = new Mock<IUserCommunication>();
-            _cut = new Game(_diceMock.Object, _userCommunicationMock.Object);
+            _cut = new DiceGameApp(_diceMock.Object, _userCommunicationMock.Object);
         }
      
-
 
         [Test]
         public void PlayShallReturnVictory_IfUserGuessesTheNumberOnTheFirstTry()

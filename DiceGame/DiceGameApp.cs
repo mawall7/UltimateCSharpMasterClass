@@ -4,7 +4,7 @@ using System;
 namespace DiceGame
 {
 
-    public class Game
+    public class DiceGameApp
     {
         public readonly IDice _dice;
 
@@ -13,7 +13,7 @@ namespace DiceGame
         private int _tries = 3;
 
         public int _result { get; set; }
-        public Game(IDice dice, IUserCommunication userCommunication)
+        public DiceGameApp(IDice dice, IUserCommunication userCommunication)
         {
             _dice = dice;
             _userCommunication = userCommunication;
@@ -27,6 +27,7 @@ namespace DiceGame
         {
             _result = _dice.Roll();
 
+            
             _userCommunication.ShowMessage(String.Format(Resource.DiceRolledMessage,_tries));
 
             while (_tries > 0)
